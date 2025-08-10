@@ -23,8 +23,8 @@ if(!port){
 }
 
 app.use(cors({
-    origin: "http://localhost:5173", // your frontend origin
-    credentials: true,
+  origin: "https://employee-management.netlify.app",
+  credentials: true,
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

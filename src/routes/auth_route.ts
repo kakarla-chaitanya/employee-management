@@ -14,7 +14,7 @@ router.get("/logout",validateToken,asynchandler(async (req,res)=>{
       await logout(req.user?._id?req.user._id:"",typeof req.headers["x-device-id"]==="string"?req.headers["x-device-id"]:"");
       res.clearCookie("token", {
       httpOnly: true,
-      sameSite: "lax",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       secure: process.env.NODE_ENV === "production",
     });
     res.status(200).send("Logged out successfully");
@@ -66,9 +66,9 @@ router.post(
             let token=await generateToken(user._id,req.headers["x-device-id"]);
             res.cookie("token", token, {
               httpOnly: true,
-              secure: false,
+              secure: true,
               path:"/",
-              sameSite: "lax",
+              sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
               maxAge: 60 * 60 * 1000, // 1 hour
             });
             return res.status(200).json({
