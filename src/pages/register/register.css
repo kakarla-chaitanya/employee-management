@@ -1,0 +1,58 @@
+.register{
+    height: 100vh;
+    width: 100vw;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register > .register-form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+.register-form >*{
+    min-width: 250px;
+}
+
+.register> .register-form > .register-heading{
+    font-weight: 600;
+    font-size:xx-large;
+    margin: 0px;
+}
+
+.register > .register-form > .register-middle{
+    width: fit-content;
+    text-align: center;
+}
+
+.register  input{
+    padding: 15px;
+    background-color: rgb(230, 230, 230);
+    border-radius: 5px;
+    border: 2px solid transparent;
+}
+.register input:focus{
+    outline: none;
+    border: 2px solid var(--shade-of-button);
+    background-color: white;
+}
+.register button{
+    font-size:medium;
+    padding: 10px 15px;
+    border: 0px;
+    border-radius: 20px;
+    box-shadow: var(--button-shadow);
+}
+.register .register-button{
+    background-color: var(--button-color);
+    color:white;
+}
+
+.register .login-button{
+    background-color: white;
+    color: black;
+}

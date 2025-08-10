@@ -1,0 +1,141 @@
+.home{
+    overflow-y: hidden;
+    overflow-x: hidden;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.home >*{
+    padding: 10px;
+}
+.header,.footer{
+    box-shadow: var(--elevation-shadow);
+}
+.header{
+    position: sticky;
+    top: 0;
+    padding: 20px;
+    font-size:x-large;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header > button{
+    background-color:  white;
+    border: 0px;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: var(--button-shadow);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer{
+    position: sticky;
+    bottom: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: end;
+}
+.home>.content button,.home>.footer button{
+    color: white;
+    border-radius: 20px;
+    padding: 5px 10px;
+    border: 0px;
+    background-color: var(--button-color);
+}
+.footer > button{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: larger;
+    font-weight: 600;
+}
+.content{
+    overflow-y:visible;
+    overflow-x: hidden;
+    flex-grow: 1;
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap:wrap;
+    column-gap: 20px;
+    row-gap: 10px;
+    align-content: flex-start;
+}
+.content-no-body{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+}
+
+.form-content{
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    background-color:var(--primary-color) ;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 10px;
+}
+.form  input{
+    padding: 10px 15px;
+    border-radius: 7px;
+    border: 1px solid gray;
+    outline: none;
+    width: 95%;
+}
+.form  button{
+    padding: 10px 20px;
+    font-size: larger;
+    font-weight: bold;
+    border: 0px;
+    box-shadow: var(--button-shadow);
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    justify-content: center;
+    /* align-items: center; */
+    /* background-color:var(--primary-color); */
+    box-shadow: var(--card-shadow);
+    padding:10px;
+    border-radius: 5px;
+    height:120px;
+    min-width: 200px;
+}
+.card-buttons{
+    font-size: 20px;
+    display: flex;
+    gap: 20px;
+    justify-content: space-around;
+}
+.card-buttons > .delete{
+    background-color: rgba(234, 19, 19, 0.705) !important;
+}
+.card >div{
+    color: black;
+    display: flex;
+    gap:4px;
+    font-size: 14px;
+}
+.card > .bold{
+    font-style: normal;
+    color: black;
+    align-self: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+.card  .italic{
+    color: rgb(70, 68, 68);
+    font-style: italic;
+}

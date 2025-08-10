@@ -1,0 +1,59 @@
+:root{
+   --primary-color:	white; 
+   --button-color: rgba(14, 14, 235, 0.87);
+   --loader-color:blue;
+   --shade-of-button:rgba(14, 14, 235, 0.70);
+   --card-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+   --button-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+   --elevation-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+
+body{
+    overflow-y: hidden;
+    overflow-x: hidden;
+    margin: 0px;
+    border: 0px;
+    position: relative;
+}
+
+
+
+.floating{
+    top:0px;
+    left: 0px;
+    margin: 0px;
+    padding: 0px;
+    margin: 0px;
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 5;
+    background-color: rgba(231, 231, 231, 0.475);
+}
+
+.loader{
+    z-index: 10;
+}
+
+.toast{
+    z-index: 999;
+    position: fixed;
+    padding: 10px 15px;
+    background-color: rgb(255, 58, 58);
+    color: white;
+    border-radius: 10px;
+    left: 50%;
+    transform: translateX(-50%) ;  
+    animation: popFromBottom 0.5s linear forwards;
+}
+@keyframes popFromBottom {
+    0%{
+        bottom: -50px;
+    }
+    100%{
+        bottom:20px;
+    }
+}
