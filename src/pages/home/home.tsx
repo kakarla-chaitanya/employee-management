@@ -28,7 +28,6 @@ export default function Home(){
     }
     (async () => {
       const allEmployees=await getAllEmployees();
-      // console.log(allEmployees);
       if (allEmployees){
         setData(allEmployees);
       }
