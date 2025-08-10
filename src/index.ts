@@ -23,7 +23,7 @@ if(!port){
 }
 
 app.use(cors({
-  origin: "https://employee-management.netlify.app",
+  origin: "https://employee-managemant.netlify.app",
   credentials: true,
 }));
 app.use(express.json());
