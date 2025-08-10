@@ -41,7 +41,7 @@
     display: flex;
     justify-content: end;
 }
-.home>.content button,.home>.footer button{
+.home>.content button,.home>.footer button,.form button{
     color: white;
     border-radius: 20px;
     padding: 5px 10px;
