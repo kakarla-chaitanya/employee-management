@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 import redisClient from "../config/redis";
 dotenv.config();
 const windowSizeInSeconds=60;
-const maxRequest=100;
+const maxRequest=10;
 
 export default async function isRateLimited(ip:string) {
     
