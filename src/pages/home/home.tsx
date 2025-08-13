@@ -21,14 +21,15 @@ export default function Home(){
   const [source,setSource]=useState<string>("");
   const [editIndex, setEditIndex] = useState<number|null>(null);// NEW  
 
-  
+  useEffect(()=>{
+    if (formRef.current) {
+        formRef.current.style.visibility = 'hidden';
+    }
+  },[]);
 
   useEffect(()=>{
     if(authChecked){
       setLoading(true);
-      if (formRef.current) {
-        formRef.current.style.visibility = 'hidden';
-      }
       (async () => {
         const allEmployees=await getAllEmployees();
         if (allEmployees){
