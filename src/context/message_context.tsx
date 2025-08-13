@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-import socket from "../socket";
 
 interface MessageContextType{
     addNewmessage:(newMessage:string)=>void,
