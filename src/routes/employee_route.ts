@@ -4,6 +4,7 @@ import { addEmployee, deleteEmployee, getAllEmployees, updateEmployee } from "..
 import { getOrSetCache } from "../utils/cache";
 import validateToken from "../middleware/validate_token";
 import IEmployeeSchema from "../models/employee/i_employee_schema";
+import { io } from "../config/socket_io";
 
 const router=express.Router();
 
@@ -14,7 +15,7 @@ router.get("/all-employees",asyncHandler(async (_req,res)=>{
     const allEmployees=await getOrSetCache<IEmployeeSchema[]>("employees",3600,async ()=>{
         return await getAllEmployees();
     });
-    return res.status(200).send(allEmployees);
+    return res.status(200).json(allEmployees);
 }));
 
 router.post("/add-new-employee",asyncHandler(async (req,res)=>{
@@ -23,6 +24,7 @@ router.post("/add-new-employee",asyncHandler(async (req,res)=>{
         throw new Error("Missing required fields {name,email,department}");
     }
     const newEmployee=await addEmployee(name,email,department);
+    io.emit("message",`${req.user?.name} added a new employee named :- ${newEmployee.name}`);
     return res.status(200).send(newEmployee);
 }));
 

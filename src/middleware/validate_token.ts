@@ -41,8 +41,9 @@ export default async function validateToken(req:Request,_res:Response,next:NextF
         //session verification
         const valid = await verifySession(decoded.id, decoded.jti);
         if (!valid) {
-          throw new GlobalError("Session Expired", "Authorization Error", "Session expired, please login again.");
+          throw new GlobalError("Session Expired", "Authorization Error", "Session expired, please login again.",440);
         }
+
         req.user={
             _id:decoded.id,
             jti:decoded.jti,

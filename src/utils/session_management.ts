@@ -1,6 +1,6 @@
 import redisClient from "../config/redis";
 
-const MAX_CONNECTIONS=1;
+const MAX_CONNECTIONS=Number(process.env.MAX_LOGINS||"3");
 export async function createSession(id:string,deviceId:string,jti:string,ttl:number){
     const sessionKey=`session:${id}:${deviceId}`;
     const userKey=`session:${id}`;
@@ -12,17 +12,22 @@ export async function createSession(id:string,deviceId:string,jti:string,ttl:num
 
     const sessionCount=await redisClient.zcard(userKey);
     if (sessionCount>MAX_CONNECTIONS){
+        console.log("removing top one");
         const [oldest]=await redisClient.zrange(userKey,0,0);
         if(oldest){
             await redisClient.del(oldest); //delete this session+id
-            await redisClient.zrem(userKey,oldest) //remove from list of devices
+            await redisClient.zrem(userKey,oldest); //remove from list of devices
+            console.log("Removed",oldest);
         }
     }
 }
 
 export async function verifySession(id:string,jti:string,) {
     const sessionKeys=await redisClient.zrangebyscore(`session:${id}`,0,Date.now());
+    // console.log(sessionKeys.length);
 
+    // console.log(MAX_CONNECTIONS);
+    // console.log("Session keys",`session:${id}`,sessionKeys);
     
     for (const key of sessionKeys){
         const storedJti=await redisClient.get(key);

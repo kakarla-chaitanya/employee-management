@@ -2,7 +2,7 @@ import { NextFunction,Request,Response } from "express";
 import isRateLimited from "../utils/rate_limiter";
 import GlobalError from "../Errors/global_error";
 
-function extractIp(req: Request): string {
+export function extractIp(req: Request): string {
   const xff = req.headers["x-forwarded-for"];
 
   if (typeof xff === "string") {

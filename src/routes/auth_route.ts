@@ -7,6 +7,7 @@ import checkEmptyBody from "../middleware/check_empty_body";
 import GlobalError from "../Errors/global_error";
 import generateToken from "../utils/generate_token";
 import validateToken from "../middleware/validate_token";
+import redisClient from "../config/redis";
 
 const router=express.Router();
 
@@ -64,6 +65,7 @@ router.post(
                   throw new GlobalError("Missing device Id","Invalid Header");
             }
             let token=await generateToken(user._id,req.headers["x-device-id"]);
+            await redisClient.incr("successfulLoginRequest");
             res.cookie("token", token, {
               httpOnly: true,
               secure: true,

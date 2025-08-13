@@ -5,13 +5,23 @@ export async function getOrSetCache<T>(
     key:string,
     ttl:number,
     fetch:()=>Promise<T>
-) :Promise<T>{
+) :Promise<{
+        source:string,
+        data:T
+    }>{
     const cached=await redisClient.get(key);
-    if (cached) return JSON.parse(cached);
-
+    if (cached){ 
+        return {
+            source:"Cache",
+            data:JSON.parse(cached),
+        };
+    }
     const newData=await fetch();
     await redisClient.set(key,JSON.stringify(newData),"EX",ttl);
-    return newData;
+    return {
+            source:"Mongo DB",
+            data:newData,
+        };
 }
 
 export async function setCache<T>(key:string,value:T,ttl:number) {
