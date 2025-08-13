@@ -38,6 +38,7 @@ router.put("/edit-employee/:id",asyncHandler(async(req,res)=>{
         throw new Error("Missing required fields {name,email,department}");
     }
     const updEmployee=await updateEmployee(Number(_id),name,email,department);
+    io.emit("message",`${req.user?.name} updated a employee named :- ${updEmployee.name}`);
     return res.status(200).send(updEmployee);
 }));
 
@@ -46,7 +47,8 @@ router.delete("/delete-employee/:id",asyncHandler(async(req,res)=>{
     if(!_id){
         throw new Error("Invalid url or id");
     }
-    await deleteEmployee(Number(_id));
+    const deletedEmployee=await deleteEmployee(Number(_id));
+    io.emit("message",`${req.user?.name} deleted employee named :- ${deletedEmployee.name}`);
     return res.status(200).send("Deleted sucessfully");
 }));
 

@@ -81,6 +81,7 @@ async function deleteEmployee(_id:number){
         throw new Error(`Invalid id:- ${_id}`);
     }
     await deleteKey("employees");
+    return employee;
 }
 
 async function getAllEmployees():Promise<IEmployeeSchema[]>{
