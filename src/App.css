@@ -9,13 +9,46 @@
 }
 
 body{
-    overflow-y: hidden;
+    overflow-y:hidden;
     overflow-x: hidden;
     margin: 0px;
     border: 0px;
     position: relative;
 }
 
+.message-container{
+    z-index:999;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column; /* New messages on bottom */
+    gap: 10px;
+    pointer-events: none; 
+}
+
+.message-popup {
+  background-color: #222;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 8px;
+  min-width: 200px;
+  text-align: center;
+  animation: slideUpFade 0.4s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes slideUpFade {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
 
 .floating{
@@ -38,8 +71,42 @@ body{
     z-index: 10;
 }
 
+.header,.footer{
+    box-shadow: var(--elevation-shadow);
+}
+.header{
+    position: sticky;
+    top: 0;
+    padding: 20px;
+    font-size:x-large;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header >div{
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+.header >div > button{
+    background-color:  white;
+    border: 0px;
+    border-radius: 50%;
+    padding: 10px;
+    box-shadow: var(--button-shadow);
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header > div > button :hover{
+    cursor: pointer;
+}
+
 .toast{
-    z-index: 999;
+    z-index: 990;
     position: fixed;
     padding: 10px 15px;
     background-color: rgb(255, 58, 58);

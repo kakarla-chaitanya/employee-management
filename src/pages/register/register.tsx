@@ -1,11 +1,13 @@
-import { useNavigate } from "react-router-dom";
 import "./register.css";
 import { useState } from "react";
 import { register } from "../../services/auth_service";
 import { triggerToast } from "../../utils/toast";
 import { useLoaderContext } from "../../context/loader_context";
+import { useNavigate } from "react-router-dom";
 export default function Register(){
+
     const navigate=useNavigate();
+
     const setLoading=useLoaderContext();
     const [formData,setFormData]=useState({
         name:"",

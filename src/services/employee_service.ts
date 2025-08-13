@@ -1,7 +1,11 @@
 import { _delete, get, post, put } from "./http_service";
 
 export async function getAllEmployees() {
-    return await get("/employee/all-employees");
+    let {data,response}=await get("/employee/all-employees",{withResponse:true});
+    return {
+        source:`${data.source}(Response time:- ${(response as any).duration}ms)`,
+        employees:data.data,
+    };
 }
 
 export async function addnewEmployee(newEmployee:{

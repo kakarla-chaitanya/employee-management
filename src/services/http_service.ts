@@ -2,6 +2,7 @@ import axios from "axios";
 import { triggerToast } from "../utils/toast";
 import api from "./api";
 import getOrCreateDeviceId from "../utils/device_id";
+import { triggerAuthError } from "../utils/auth_error";
 
 const defaultHeaders={
     "Content-Type":"application/json",
@@ -12,13 +13,17 @@ function _includeDefaultHeaders(headers:{}){
     return {...headers,...defaultHeaders};
 }
 
-async function get(path:string,{params={},headers={},handleError=true}={}){
+async function get(path:string,{params={},headers={},handleError=true,withResponse=false}={}){
     headers=_includeDefaultHeaders(headers);
     try{
         const res=await api.get(path,{
             headers:headers,
             params:params,
         });
+        if (withResponse) {
+          return { data: res.data, response: res };
+        }
+
         return res.data;    
     }catch(error){
         if(handleError){
@@ -78,7 +83,18 @@ async function _delete(path:string,{data={},params={},headers={}}={}){
 
 function _handleError(error:any){
     if (axios.isAxiosError(error) && error.response) {
-        console.log(error.response);
+        console.log(error);
+        if (error.response.status==440){
+            console.log("Before calling auth error");
+            triggerAuthError();
+            console.log("after calling auth error");
+            if ("name" in error.response.data && "message" in error.response.data){
+                triggerToast({msg:`${error.response.data.name} :- ${error.response.data.message}`});
+            }else{
+                triggerToast({msg:error.response.data.toString()});
+            }
+            return ;
+        }
         if (typeof error.response.data==="string"){
             triggerToast({msg:error.response.data});
             return;
@@ -92,7 +108,6 @@ function _handleError(error:any){
                 triggerToast({msg:`${error.response.data.name} :- ${error.response.data.message}`});
                 return;
             }
-            console.log(typeof error.response.data.details);
             if (typeof error.response.data.details==="object"){
                 if ("errors" in error.response.data.details){
                     triggerToast({msg:error.response.data.details.errors[0].msg});

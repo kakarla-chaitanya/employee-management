@@ -1,0 +1,57 @@
+.dashboard{
+    overflow-y: hidden;
+    overflow-x: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard > .dashboard-body{
+    flex: 1;
+    padding: 20px;
+    overflow-y: visible;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.dashboard > .dashboard-body > div{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.dashboard > .dashboard-body > div > .bold-text{
+    font-weight: 600;
+    font-size: x-large;
+}
+
+.dashboard  .dashboard-flex-card{
+    width: fit-content;
+    display: flex;
+    gap:20px;
+    flex-wrap: wrap;
+}
+
+.dashboard-card{
+    min-width: 300px;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: var(--button-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.dashboard-card > .dashboard-card-header{
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.dashboard-card > .bold-text{
+    font-weight: 550;
+    font-size:x-large;
+}

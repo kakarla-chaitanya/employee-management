@@ -9,30 +9,6 @@
 .home >*{
     padding: 10px;
 }
-.header,.footer{
-    box-shadow: var(--elevation-shadow);
-}
-.header{
-    position: sticky;
-    top: 0;
-    padding: 20px;
-    font-size:x-large;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.header > button{
-    background-color:  white;
-    border: 0px;
-    border-radius: 50%;
-    padding: 10px;
-    box-shadow: var(--button-shadow);
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 .footer{
     position: sticky;
@@ -56,11 +32,20 @@
     font-weight: 600;
 }
 .content{
+    padding: 10px 20px;
     overflow-y:visible;
     overflow-x: hidden;
     flex-grow: 1;
     display: flex;
-    /* flex-direction: column; */
+    flex-direction: column;
+    align-content: flex-start;
+}
+.content > .content-source{
+    font-size:medium;
+}
+.content-body{
+    display: flex;
+    flex-direction: row;
     flex-wrap:wrap;
     column-gap: 20px;
     row-gap: 10px;
@@ -101,6 +86,7 @@
     box-shadow: var(--button-shadow);
 }
 .card{
+
     display: flex;
     flex-direction: column;
     gap:10px;

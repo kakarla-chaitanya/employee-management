@@ -1,14 +1,14 @@
-import { useNavigate } from "react-router-dom";
 import "./login.css";
 import { useState } from "react";
 import { login } from "../../services/auth_service";
 import { useLoaderContext } from "../../context/loader_context";
 import { useAuthContext } from "../../context/auth_context";
 import { triggerToast } from "../../utils/toast";
+import { useNavigate } from "react-router-dom";
 export default function Login(){
 
     const navigate=useNavigate();
-    const {setUser}=useAuthContext();
+    const {setUser,setAuthChecked}=useAuthContext();
     const setLoading=useLoaderContext();
     
     const [formData,setFormData]=useState({
@@ -40,6 +40,7 @@ export default function Login(){
         const res=await login(formData.email,formData.password);
         if (res){
             setUser(res);
+            setAuthChecked(true);
             setFormData({
                 email:"",
                 password:"",

@@ -4,6 +4,7 @@ import { useLoaderContext } from "../../../context/loader_context";
 import { addnewEmployee, editEmployee } from "../../../services/employee_service";
 
 interface FormProps{
+    setSource:React.Dispatch<React.SetStateAction<string>>,
     setData: React.Dispatch<React.SetStateAction<Employee[]>>,
     formRef: React.RefObject<HTMLDivElement | null>, 
     data: Employee[], 
@@ -11,7 +12,7 @@ interface FormProps{
     setEditIndex: React.Dispatch<React.SetStateAction<number | null>>,
 }
 
-export default function Form({ setData, formRef, data, editIndex, setEditIndex}:FormProps) {
+export default function Form({ setSource,setData, formRef, data, editIndex, setEditIndex}:FormProps) {
    const setLoading=useLoaderContext();
    
     const [formData, setFormData] = useState({
@@ -34,7 +35,7 @@ export default function Form({ setData, formRef, data, editIndex, setEditIndex}:
         }
         setFormData({ name: '', email: '', department: '' });
         setEditIndex(null);
-        setLoading(false);
+        
     }
 
     useEffect(() => {
@@ -105,6 +106,7 @@ export default function Form({ setData, formRef, data, editIndex, setEditIndex}:
                                     updated[editIndex] = res;
                                     return updated;
                                 });
+                                setSource("Mongo DB");
                                 closeForm();
                             }
                         } else {
@@ -112,9 +114,11 @@ export default function Form({ setData, formRef, data, editIndex, setEditIndex}:
                             const res=await addnewEmployee(formData);
                             if (res){
                                 setData((prev)=>[...prev, res]);
+                                setSource("Mongo DB");
                                 closeForm();
                             }
                         }
+                        setLoading(false);
                     }}
                 >
                     {editIndex !== null ? "Update" : "Submit"}
