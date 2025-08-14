@@ -58,6 +58,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     //initial verify
     useEffect(() => {
         (async () => {
+            setLoading(true);
             const res=await verifyMe();
             console.log("verfify",res);
             if(res){
@@ -65,6 +66,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
             }else{
                 setUser(null);
             }
+            setLoading(false);
             setAuthChecked(true);
         })();
     }, []); 
@@ -90,7 +92,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return (
       <AuthContext.Provider value={{ user, setUser,authChecked,setAuthChecked}}>
         {children}
-        {authError}
+        {authError&&<div style={{width:"0px",height:"0px"}}></div>}
       </AuthContext.Provider>
     );
 }
